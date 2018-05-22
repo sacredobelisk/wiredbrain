@@ -1,0 +1,26 @@
+<ion-header>
+	<ion-toolbar color="secondary">
+		<img src="assets/imgs/wired-brain-coffee-logo.png" class="logo">
+	</ion-toolbar>
+
+	<ion-toolbar *ngIf="!loggedIn" color="secondary">
+		<button ion-button clear [navPush]="logPage">Sign In</button>
+	</ion-toolbar>
+
+	<ion-toolbar *ngIf="loggedIn" color="secondary">
+		<button ion-button icon-left clear small>
+			<ion-icon name="contact"></ion-icon>
+			{{loggedIn}} Logged In
+		</button>
+		<button ion-button outline small (click)="signOff()">Sign Out</button>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-list *ngFor="let menu of menuData" no-padding>
+		<ion-card>
+			<img src="{{menu.pic}}">
+			<div class="card-title" [navPush]=menu.pushPage>{{menu.title}}</div>
+		</ion-card>
+	</ion-list>
+</ion-content>

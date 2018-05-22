@@ -1,0 +1,22 @@
+page-home {
+	ion-card {
+		position: relative;
+		text-align: center;
+	}
+
+	.card-title {
+		color: #fff;
+		font-size: 2em;
+		font-weight: bold;
+		position: absolute;
+		top: 86%;
+		width: 100%;
+	}
+	.logo {
+		height: 35%;
+		width: 40%;
+	}
+	ion-toolbar {
+		text-align: center;
+	}
+}
