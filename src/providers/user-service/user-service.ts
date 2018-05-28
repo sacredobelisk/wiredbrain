@@ -7,6 +7,8 @@ import { AlertController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 
+import { RewardServiceProvider } from '../reward-service/reward-service';
+
 @Injectable()
 export class UserServiceProvider {
 
@@ -14,7 +16,8 @@ export class UserServiceProvider {
 	items: AngularFireList<any>;
 	success: boolean;
 
-	constructor(private afAuth: AngularFireAuth, public alertCtrl: AlertController, private storage: Storage, private fbDb: AngularFireDatabase) {
+	constructor(private afAuth: AngularFireAuth, public alertCtrl: AlertController, private storage: Storage,
+		private fbDb: AngularFireDatabase, private reward: RewardServiceProvider) {
 
 		this.items = fbDb.list("/users");
 	}
@@ -29,9 +32,12 @@ export class UserServiceProvider {
 	}
 
 	logOut() {
-		this.storageControl("delete");
+		// this.storageControl("delete");
 		this.afAuth.auth.signOut()
-			.then(loggedOut => this.displayAlert("Logged out", "Come back and visit soon"))
+			.then(loggedOut => {
+				this.displayAlert("Logged out", "Come back and visit soon");
+				this.success = false;
+			})
 			.catch(err => this.displayAlert("Error logging out", err));
 	}
 
@@ -80,7 +86,7 @@ export class UserServiceProvider {
 	updateUser(theUser, theUserData) {
 		let newData = {
 			creation: theUserData.creation,
-			logins: theUserData.logins + 1,
+			logins: theUserData.logins,
 			rewardCount: theUserData.rewardCount,
 			lastLogin: new Date().toLocaleString(),
 			id: theUserData.id
@@ -102,7 +108,11 @@ export class UserServiceProvider {
 							this.saveNewUser(user)
 								.then(res => this.displayAlert(user, "New account saved for this user"));
 						} else {
-							this.updateUser(user, returned).then(updated => console.log(user, updated));
+							this.reward.rewardsCheck(user, returned)
+								.then(rewardResult => {
+									this.updateUser(user, rewardResult)
+										.then(updated => console.log(user, updated));
+								});
 						}
 					});
 				this.success = true;

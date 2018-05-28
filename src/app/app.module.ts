@@ -12,6 +12,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 
 import { IonicStorageModule } from "@ionic/storage";
+import { RewardServiceProvider } from '../providers/reward-service/reward-service';
+
+import { RewardModalPageModule } from '../pages/reward-modal/reward-modal.module';
 
 const firebaseProjectId = "wired-coffee-6eb97";
 
@@ -24,28 +27,30 @@ export const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage
-  ],
-  imports: [
-    BrowserModule,
-	IonicModule.forRoot(MyApp),
-	AngularFireModule.initializeApp(firebaseConfig),
-	AngularFireDatabaseModule,
-	AngularFireAuthModule,
-	IonicStorageModule.forRoot()
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserServiceProvider
-  ]
+	declarations: [
+		MyApp,
+		HomePage
+	],
+	imports: [
+		BrowserModule,
+		IonicModule.forRoot(MyApp),
+		AngularFireModule.initializeApp(firebaseConfig),
+		AngularFireDatabaseModule,
+		AngularFireAuthModule,
+		IonicStorageModule.forRoot(),
+		RewardModalPageModule
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		HomePage
+	],
+	providers: [
+		StatusBar,
+		SplashScreen,
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		UserServiceProvider,
+		RewardServiceProvider
+	]
 })
-export class AppModule {}
+export class AppModule { }
