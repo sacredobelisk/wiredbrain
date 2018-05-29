@@ -8,7 +8,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class RewardModalPage {
 
-	displayParam: number
+	displayParam: number;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
 		this.displayParam = navParams.get('rewardParam');

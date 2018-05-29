@@ -11,19 +11,19 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 
-import { IonicStorageModule } from "@ionic/storage";
+import { IonicStorageModule } from '@ionic/storage';
 import { RewardServiceProvider } from '../providers/reward-service/reward-service';
 
 import { RewardModalPageModule } from '../pages/reward-modal/reward-modal.module';
 
-const firebaseProjectId = "wired-coffee-6eb97";
+const firebaseProjectId = 'wired-coffee-6eb97';
 
 export const firebaseConfig = {
 	apiKey: "",
 	authDomain: `${firebaseProjectId}.firebaseapp.com`,
 	databaseURL: `https://${firebaseProjectId}.firebaseio.com`,
 	storageBucket: `${firebaseProjectId}.appspot.com`,
-	messagingSenderId: "545918955792"
+	messagingSenderId: '545918955792'
 };
 
 @NgModule({

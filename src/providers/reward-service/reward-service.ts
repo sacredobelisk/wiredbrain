@@ -1,15 +1,14 @@
-import { Injectable } from "@angular/core";
-
-import Promise from "promise-polyfill";
-
-import { Storage } from "@ionic/storage";
-import { ModalController } from "ionic-angular";
+import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
+import Promise from 'promise-polyfill';
+import { Storage } from '@ionic/storage';
+import { ModalController } from 'ionic-angular';
 import { RewardModalPage } from '../../pages/reward-modal/reward-modal';
 
 @Injectable()
 export class RewardServiceProvider {
 
-	constructor(private storage: Storage, private modalCtrl: ModalController) {
+	constructor(private storage: Storage, public modalCtrl: ModalController) {
 		console.log('Hello RewardServiceProvider Provider');
 	}
 
@@ -41,11 +40,12 @@ export class RewardServiceProvider {
 			return count;
 		}
 		let chance = Math.floor((Math.random() * 100) + 1);
+
 		if (chance > 50) {
 			count++;
 			this.generateReward(user, count);
-			return count;
 		}
+
 		return count;
 	}
 
